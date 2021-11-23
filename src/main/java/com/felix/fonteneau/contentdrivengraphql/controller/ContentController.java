@@ -1,4 +1,4 @@
-package com.felix.fonteneau.contentdrivengraphql.resource;
+package com.felix.fonteneau.contentdrivengraphql.controller;
 
 import com.felix.fonteneau.contentdrivengraphql.service.GraphQLService;
 import graphql.ExecutionResult;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/graphql")
+@RequestMapping("/autre")
 @RestController
-public class ContentResource {
+public class ContentController {
 
     private final GraphQLService graphQLService;
 
     @Autowired
-    public ContentResource(GraphQLService graphQLService) {
+    public ContentController(GraphQLService graphQLService) {
         this.graphQLService = graphQLService;
     }
 

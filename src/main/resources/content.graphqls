@@ -5,13 +5,13 @@ schema {
 
 type Query {
     """
-    allContents: [Content]
+    preLoadedContents(id: String): [Content]
     """
     content(id: String): Content
 }
 
 type Mutation {
-    createContent(input: ContentInput!): Boolean
+    createContent(input: ContentInput!): Content
     createAlternative(input: AlternativeInput!): Boolean
 }
 
@@ -22,7 +22,7 @@ input ContentInput {
     link: LinkInput
     text: String
     media: String
-    metadata: MetadataInput
+    metadata: [MetadataInput]
 }
 
 input LinkInput {
@@ -30,7 +30,8 @@ input LinkInput {
 }
 
 input MetadataInput {
-    metadata: [String]
+    key: String
+    value: [String]
 }
 
 
@@ -58,7 +59,7 @@ type Content {
     link: Link
     text: String
     media: String
-    metadata: Metadata
+    metadata: [Metadata]
 }
 
 type Link {
@@ -67,5 +68,6 @@ type Link {
 
 
 type Metadata {
-    metadata: [String]
+    key: String
+    value: [String]
 }
