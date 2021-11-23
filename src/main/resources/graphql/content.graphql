@@ -1,0 +1,71 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    """
+    allContents: [Content]
+    """
+    content(id: String): Content
+}
+
+type Mutation {
+    createContent(input: ContentInput!): Boolean
+    createAlternative(input: AlternativeInput!): Boolean
+}
+
+input ContentInput {
+    id: String
+    type: String
+    nestedContent: [ContentInput]
+    link: LinkInput
+    text: String
+    media: String
+    metadata: MetadataInput
+}
+
+input LinkInput {
+    to: String
+}
+
+input MetadataInput {
+    metadata: [String]
+}
+
+
+input AlternativeInput {
+    id: String
+    type: String
+    possibleAlternativesWithCondition: [AlternativeTupleInput]
+}
+
+input AlternativeTupleInput {
+    left: ContentInput
+    right: ConditionInput
+}
+
+input ConditionInput {
+    filtersName: [String]
+    or: [ConditionInput]
+    and: [ConditionInput]
+}
+
+type Content {
+    id: String
+    type: String
+    nestedContent: [Content]
+    link: Link
+    text: String
+    media: String
+    metadata: Metadata
+}
+
+type Link {
+    to: String
+}
+
+
+type Metadata {
+    metadata: [String]
+}
