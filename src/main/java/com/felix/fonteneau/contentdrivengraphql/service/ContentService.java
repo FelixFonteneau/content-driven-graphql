@@ -1,12 +1,9 @@
 package com.felix.fonteneau.contentdrivengraphql.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.felix.fonteneau.contentdrivengraphql.dao.ContentableDAO;
 import com.felix.fonteneau.contentdrivengraphql.model.Alternative;
 import com.felix.fonteneau.contentdrivengraphql.model.ApplicationData;
 import com.felix.fonteneau.contentdrivengraphql.model.Content;
-import com.felix.fonteneau.contentdrivengraphql.model.Contentable;
-import com.felix.fonteneau.contentdrivengraphql.util.EntityGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +45,4 @@ public class ContentService {
                     }
                 });
     }
-
-    public Contentable addContentAsJson(String contentAsJson) throws JsonProcessingException {
-        Contentable contentable = EntityGenerator.generateContentFromJson(contentAsJson);
-        contentableDAO.addOrReplace(contentable);
-        return contentable;
-    }
-
-
 }
