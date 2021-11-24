@@ -1,0 +1,35 @@
+input LinkInput {
+    to: String
+}
+
+input MetadataInput {
+    key: String
+    value: [String]
+}
+
+input ContentInput {
+    id: String
+    type: String
+    nestedContent: [ContentInput]
+    link: LinkInput
+    text: String
+    media: String
+    metadata: [MetadataInput]
+}
+
+input AlternativeInput {
+    id: String
+    type: String
+    possibleAlternativesWithCondition: [AlternativeTupleInput]
+}
+
+input AlternativeTupleInput {
+    left: ContentInput
+    right: ConditionInput
+}
+
+input ConditionInput {
+    filtersName: [String]
+    or: [ConditionInput]
+    and: [ConditionInput]
+}

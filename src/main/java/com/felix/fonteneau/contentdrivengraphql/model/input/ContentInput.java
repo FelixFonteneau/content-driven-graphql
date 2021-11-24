@@ -16,5 +16,5 @@ public class ContentInput {
     private LinkInput link;
     private String text;
     private String media;
-    private List<MetadataInput> metadataInput;
+    private List<MetadataInput> metadata;
 }

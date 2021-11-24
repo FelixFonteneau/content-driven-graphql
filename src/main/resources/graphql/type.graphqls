@@ -1,0 +1,20 @@
+
+type Content {
+    id: String
+    type: String
+    nestedContent: [Content]
+    link: Link
+    text: String
+    media: String
+    metadata: [Metadata]
+}
+
+type Link {
+    to: String
+}
+
+
+type Metadata {
+    key: String
+    value: [String]
+}

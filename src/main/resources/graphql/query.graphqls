@@ -1,0 +1,6 @@
+type Query {
+    """
+    preLoadedContents(id: String): [Content]
+    """
+    content(id: String): Content
+}

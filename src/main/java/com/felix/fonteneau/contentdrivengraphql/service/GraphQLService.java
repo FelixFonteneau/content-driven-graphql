@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 
+/*
 @Service
 public class GraphQLService {
     @Value("classpath:content.graphqls")
@@ -49,3 +50,5 @@ public class GraphQLService {
                 .build();
     }
 }
+
+ */

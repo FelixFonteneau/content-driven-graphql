@@ -36,55 +36,69 @@ public class MutationResolver implements GraphQLMutationResolver {
     }
 
     private static Content buildContentFromInput(ContentInput contentInput) {
-        return new Content(
-                contentInput.getId(),
-                contentInput.getType(),
-                buildNestedContentFromInput(contentInput.getNestedContent()),
-                buildLinkFromInput(contentInput.getLink()),
-                contentInput.getText(),
-                contentInput.getMedia(),
-                buildMetadataFromInput(contentInput.getMetadataInput())
-        );
+        if (contentInput != null) {
+            return new Content(
+                    contentInput.getId(),
+                    contentInput.getType(),
+                    buildNestedContentFromInput(contentInput.getNestedContent()),
+                    buildLinkFromInput(contentInput.getLink()),
+                    contentInput.getText(),
+                    contentInput.getMedia(),
+                    buildMetadataFromInput(contentInput.getMetadata())
+            );
+        }
+        return null;
     }
 
     private static List<Content> buildNestedContentFromInput(List<ContentInput> contentInputList) {
-        return contentInputList.parallelStream()
-                .map(MutationResolver::buildContentFromInput)
-                .collect(Collectors.toList());
+        if (contentInputList != null) {
+            return contentInputList.parallelStream()
+                    .map(MutationResolver::buildContentFromInput)
+                    .collect(Collectors.toList());
+        }
+        return null;
     }
 
 
     private static Link buildLinkFromInput(LinkInput linkInput) {
-        return new Link(linkInput.getTo());
+        if (linkInput != null) {
+            return new Link(linkInput.getTo());
+        }
+        return null;
     }
 
     private static List<Metadata> buildMetadataFromInput(List<MetadataInput> metadataInputs) {
-        // List<Pair<String, List<String>>> metadata = new ArrayList<>(metadataInputs.size());
-        // metadataInputs.parallelStream()
-        //         .forEach(metadataInput -> metadata.add  (metadataInput.getKey(), metadataInput.getValue()));
-        // return metadata;
-        return metadataInputs.parallelStream()
-                .map(tuple -> new Metadata(tuple.getKey(), tuple.getValue()))
-                .collect(Collectors.toList());
+        if (metadataInputs != null) {
+            return metadataInputs.parallelStream()
+                    .map(tuple -> new Metadata(tuple.getKey(), tuple.getValue()))
+                    .collect(Collectors.toList());
+        }
+        return null;
     }
 
     private static List<Pair<Content, Condition>> buildPossiblesContentByCondition(List<AlternativeTupleInput> alternativeTupleInputList) {
-        return alternativeTupleInputList.parallelStream()
-                .map(tuple -> Pair.of(buildContentFromInput(tuple.getLeft()), buildConditionFromInput(tuple.getRight())))
-                .collect(Collectors.toList());
+        if (alternativeTupleInputList != null) {
+            return alternativeTupleInputList.parallelStream()
+                    .map(tuple -> Pair.of(buildContentFromInput(tuple.getLeft()), buildConditionFromInput(tuple.getRight())))
+                    .collect(Collectors.toList());
+        }
+        return null;
     }
 
     private static Condition buildConditionFromInput(ConditionInput conditionInput) {
-        return new Condition(
-                conditionInput.getFiltersName(),
-                conditionInput.getAND()
-                        .stream()
-                        .map(MutationResolver::buildConditionFromInput)
-                        .collect(Collectors.toList()),
-                conditionInput.getOR()
-                        .stream()
-                        .map(MutationResolver::buildConditionFromInput)
-                        .collect(Collectors.toList()));
+        if (conditionInput != null) {
+            return new Condition(
+                    conditionInput.getFiltersName(),
+                    conditionInput.getAND()
+                            .stream()
+                            .map(MutationResolver::buildConditionFromInput)
+                            .collect(Collectors.toList()),
+                    conditionInput.getOR()
+                            .stream()
+                            .map(MutationResolver::buildConditionFromInput)
+                            .collect(Collectors.toList()));
+        }
+        return null;
     }
 
 }
