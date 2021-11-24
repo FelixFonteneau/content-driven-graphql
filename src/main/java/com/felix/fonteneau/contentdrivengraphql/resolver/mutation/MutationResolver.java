@@ -2,18 +2,13 @@ package com.felix.fonteneau.contentdrivengraphql.resolver.mutation;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.felix.fonteneau.contentdrivengraphql.dao.ContentableDAO;
-import com.felix.fonteneau.contentdrivengraphql.model.Alternative;
-import com.felix.fonteneau.contentdrivengraphql.model.Condition;
-import com.felix.fonteneau.contentdrivengraphql.model.Content;
-import com.felix.fonteneau.contentdrivengraphql.model.Link;
+import com.felix.fonteneau.contentdrivengraphql.model.*;
 import com.felix.fonteneau.contentdrivengraphql.model.input.*;
 import com.felix.fonteneau.contentdrivengraphql.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -63,11 +58,14 @@ public class MutationResolver implements GraphQLMutationResolver {
         return new Link(linkInput.getTo());
     }
 
-    private static Map<String, List<String>> buildMetadataFromInput(List<MetadataInput> metadataInputs) {
-        Map<String, List<String>> metadata = new LinkedHashMap<>(metadataInputs.size());
-        metadataInputs.parallelStream()
-                .forEach(metadataInput -> metadata.put(metadataInput.getKey(), metadataInput.getValue()));
-        return metadata;
+    private static List<Metadata> buildMetadataFromInput(List<MetadataInput> metadataInputs) {
+        // List<Pair<String, List<String>>> metadata = new ArrayList<>(metadataInputs.size());
+        // metadataInputs.parallelStream()
+        //         .forEach(metadataInput -> metadata.add  (metadataInput.getKey(), metadataInput.getValue()));
+        // return metadata;
+        return metadataInputs.parallelStream()
+                .map(tuple -> new Metadata(tuple.getKey(), tuple.getValue()))
+                .collect(Collectors.toList());
     }
 
     private static List<Pair<Content, Condition>> buildPossiblesContentByCondition(List<AlternativeTupleInput> alternativeTupleInputList) {

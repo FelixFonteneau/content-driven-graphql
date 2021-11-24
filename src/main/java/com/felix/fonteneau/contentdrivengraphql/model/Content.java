@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -17,5 +16,5 @@ public class Content implements Contentable {
     private Link link;
     private String text;
     private String media;
-    private Map<String, List<String>> metadata;
+    private List<Metadata> metadata;
 }
