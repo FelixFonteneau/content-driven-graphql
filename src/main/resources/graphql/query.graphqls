@@ -1,6 +1,6 @@
 type Query {
     """
-    preLoadedContents(id: String): [Content]
+    preLoadedContents(id: String, numberOfPreload: Int): [Content]
     """
     content(id: String): Content
 }
