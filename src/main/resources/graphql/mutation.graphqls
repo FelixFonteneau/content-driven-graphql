@@ -1,4 +1,4 @@
 type Mutation {
-    createContent(input: ContentInput!): Content!
+    createContent(input: ContentInput!): Boolean!
     createAlternative(input: AlternativeInput!): Boolean!
 }

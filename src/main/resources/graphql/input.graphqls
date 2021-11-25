@@ -3,8 +3,7 @@ input LinkInput {
 }
 
 input MetadataInput {
-    key: String
-    value: [String]
+    style: [String]
 }
 
 input ContentInput {

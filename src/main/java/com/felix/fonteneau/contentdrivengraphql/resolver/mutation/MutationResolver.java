@@ -20,10 +20,10 @@ public class MutationResolver implements GraphQLMutationResolver {
         this.contentableDAO = contentableDAO;
     }
 
-    public Content createContent(ContentInput contentInput) {
+    public Boolean createContent(ContentInput contentInput) {
         Content content = buildContentFromInput(contentInput);
         contentableDAO.addOrReplace(content);
-        return content;
+        return true;
     }
 
     public Boolean createAlternative(AlternativeInput alternativeInput) {
@@ -70,7 +70,7 @@ public class MutationResolver implements GraphQLMutationResolver {
     private static List<Metadata> buildMetadataFromInput(List<MetadataInput> metadataInputs) {
         if (metadataInputs != null) {
             return metadataInputs.parallelStream()
-                    .map(tuple -> new Metadata(tuple.getKey(), tuple.getValue()))
+                    .map(input -> new Metadata(input.getStyle()))
                     .collect(Collectors.toList());
         }
         return null;

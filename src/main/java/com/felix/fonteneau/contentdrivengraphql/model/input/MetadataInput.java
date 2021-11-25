@@ -10,6 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MetadataInput {
-    private String key;
-    private List<String> value;
+    private List<String> style;
 }

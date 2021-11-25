@@ -15,6 +15,5 @@ type Link {
 
 
 type Metadata {
-    key: String
-    value: [String]
+    style: [String]
 }
