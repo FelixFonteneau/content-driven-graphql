@@ -89,14 +89,20 @@ public class MutationResolver implements GraphQLMutationResolver {
         if (conditionInput != null) {
             return new Condition(
                     conditionInput.getFiltersName(),
-                    conditionInput.getAND()
-                            .stream()
-                            .map(MutationResolver::buildConditionFromInput)
-                            .collect(Collectors.toList()),
-                    conditionInput.getOR()
-                            .stream()
-                            .map(MutationResolver::buildConditionFromInput)
-                            .collect(Collectors.toList()));
+                    conditionInput.getAND() == null ?
+                            null
+                            :
+                            conditionInput.getAND()
+                                    .stream()
+                                    .map(MutationResolver::buildConditionFromInput)
+                                    .collect(Collectors.toList()),
+                    conditionInput.getOR() == null ?
+                            null
+                            :
+                            conditionInput.getOR()
+                                    .stream()
+                                    .map(MutationResolver::buildConditionFromInput)
+                                    .collect(Collectors.toList()));
         }
         return null;
     }
